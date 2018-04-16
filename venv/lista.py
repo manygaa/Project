@@ -1,6 +1,6 @@
 Intiger =[1, 2, 3, 4, 5]
 Float=[3.1, 45.1, 6.1, 11.5, 1,2]
-Stringi=["jeden", "dwa", "trzy", "czter", "pieć"]
+Stringi=["jeden", "dwa", "trzy", "czter", "piec"]
 Mix=["jeden", 2, 4.1]
 
 print(Intiger[0:5])
