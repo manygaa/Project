@@ -1,44 +1,33 @@
-#task lotto 2018-04-16
+# task lotto 2018-04-16
 import random
 import time
-
-
-def avoiding_repetion(x):
-    temp = [x]
-
-def choice_numbers():
-    x = raw_input("Enter 6 numbers in the range from 1 to 49, divide the number by spaces: ")
-    return x
-def conversion(x):
-    for i in list_string:
-        x.append(int(i))
-    return x
-
-
+import function_lotto
+#!/usr/bin/python
 
 print("The Lotto game, the probability of winning is 1 to 13 983 816!")
-string = choice_numbers()
-list_string = string.split(" ")
-
+string = raw_input("Enter 6 numbers in the range from 1 to 49, divide the number by spaces: ")
+string = string.strip(" ")
+string = string.split(" ")
 numbers = []
-i = 0
-numbers = conversion(list_string)
-for j in len(numbers):
-    if type(numbers[i]) == int and numbers[i] >= 1 and numbers[i] <= 49:
-        if j <= 6:
-            answer = raw_input("Too many numbers, accept the first 6 or do You want to enter new numbers (\"Y\" or \"N\"")
-            if answer == 'Y' or answer == 'y':
-                break
-            elif answer == 'N' or answer == 'n':
-                choice_numbers()
-                j = 0
-            else:
-                print("Incoret value")
+
+if len(string) != 6:
+    print("Incorect value, there should be 6 numbers!")
+else:
+    for i in string:
+        numbers.append(int(i))
+    if len(list(set(numbers))) != len(numbers):
+        print("Numbers can not be repeated!")
+    elif numbers[i] <= 0 and numbers[i] >= 50:
+        print("Wrong range of numbers!")
     else:
-        numbers[i] = raw_input("Incorrect value in position ", i, " enter a new one: ")
+        print("Error!!!")
 print(numbers)
 
-random.seed(time.time())
+
+
+
+
+
 
 
 
