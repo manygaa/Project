@@ -3,7 +3,7 @@ import time
 import sys
 
 def enterign_numbers():
-    string = raw_input("\nEnter 6 numbers in the range from 1 to 49, divide the number by spaces: ")
+    string = input("\nEnter 6 numbers in the range from 1 to 49, divide the number by spaces: ")
     string = string.strip(" ")
     string = string.split()
     numbers = []
@@ -11,7 +11,7 @@ def enterign_numbers():
         if i.isdigit():
             numbers.append(int(i))
         else:
-            print "The value entered \'",i,"\' is not a number!"
+            print("The value entered \'",i,"\' is not a number!")
     if len(numbers) != 6:
         print("Incorrect value, there should be 6 numbers!")
         return wrong_data_menu()
@@ -20,10 +20,10 @@ def enterign_numbers():
             print("Numbers can not be repeated!")
             return wrong_data_menu()
         elif max(numbers) > 49:
-            print "Wrong range of numbers, too large numbers:", "\'", max(numbers) ,"\'"
+            print("Wrong range of numbers, too large numbers:", "\'", max(numbers) ,"\'")
             return wrong_data_menu()
         elif min(numbers) < 1:
-            print "Wrong range of numbers, too small numbers:", "\'", min(numbers), "\'"
+            print("Wrong range of numbers, too small numbers:", "\'", min(numbers), "\'")
             return wrong_data_menu()
     return numbers
 
@@ -38,16 +38,16 @@ def Lottery_numbers():
 
 def draw_animation(lottery_numbers):
     time.sleep(1)
-    print("\nDraw!!!\nKeep your finger crossed:)\nThe block is released, we draw 6 numbers:")
-    time.sleep(3)
+    print("\nDraw!!!\nKeep your finger crossed:)\nThe block is released, we draw 6 numbers:\n")
     for i in lottery_numbers:
-        print i,
         time.sleep(3)
+        print(i, end=' ')
+        sys.stdout.flush()
     return 0
 
 def winning_animation(hit_numbers):
     time.sleep(2)
-    print "\n\nYou have chosen",len(hit_numbers), "numbers correctly"
+    print("\n\nYou have chosen",len(hit_numbers), "numbers correctly")
     time.sleep(2)
     if len(hit_numbers) <= 2:
         print("Unfortunately you won nothing, try again.")
@@ -72,11 +72,11 @@ def when_I_win(numbers):
 
 def final_menu(hit_numbers, numbers):
     if len(hit_numbers) != 6:
-        print("Do you want to play again? Maybe you want to check at which draw would you win the main prize?")
-        answer = raw_input(
-            "Enter P to play again:\nEnter C to check (this may take a while)\nEnter Q to finish the program: ")
+        print("\nDo you want to play again? Maybe you want to check at which draw would you win the main prize?")
+        answer = input(
+            "Enter P to play again:\nEnter C to check (this may take a while): \nEnter Q to finish the program: ")
         if answer == "C" or answer == "c" or answer == "Check" or answer == "check" or answer == "CHECK":
-            print "The main win would be after ", when_I_win(numbers), "draws."
+            print ("The main win would be after ", when_I_win(numbers), "draws.")
         elif answer == "Q" or answer == "q" or answer == "Quit" or answer == "quit" or answer == "QUIT":
             print("End of the program!\nSee you")
             sys.exit(0)
@@ -87,24 +87,24 @@ def final_menu(hit_numbers, numbers):
             print("Incorrect value!")
             final_menu(hit_numbers, numbers)
     else:
-        print ("Congratulations, you won the main prize")
+        print("Congratulations, you won the main prize")
     return 0
 
 def welcome_menu():
-    answer = raw_input("You want to enter numbers or choose at random (enter E or R): ")
+    answer = input("You want to enter numbers or choose at random (enter E or R): ")
     if answer == "E" or answer == "e" or answer == "enter" or answer == "ENTER" or answer == "Enter":
         numbers = enterign_numbers()
-        print "Your coupon ", numbers
+        print("\nYour coupon: ", numbers)
     elif answer == "R" or answer == "r" or answer == "random" or answer == "Random" or answer == "Random":
         numbers = Lottery_numbers()
-        print "Your coupon ", numbers
+        print("\nYour coupon: ", numbers)
     else:
         print("Incorrect value!")
         return welcome_menu()
     return numbers
 
 def wrong_data_menu():
-    answer = raw_input("Do you want to enter numbers again (Y or N): ")
+    answer = input("Do you want to enter numbers again (Y or N): ")
     if answer == "Y" or answer == "y" or answer == "yes" or answer == "Yes" or answer == "YES":
         return enterign_numbers()
     elif answer == "N" or answer == "n" or answer == "no" or answer == "No" or answer == "NO":
