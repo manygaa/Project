@@ -65,6 +65,7 @@ while loop_condition == True:
     elif main_input == "2":
         data = input("Enter the date (data format dd-mm-yyyy) of the draw: " )
         print(dictionary[data])
+        print()
 
 
 
