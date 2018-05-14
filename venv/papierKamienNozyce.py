@@ -6,7 +6,7 @@ L = ['K', 'P', 'N']
 random.seed(time.time())
 x =random.randint(0, 2)
 
-wybor = raw_input('podaj co wybierasz: ')
+wybor = input('podaj co wybierasz: ')
 PK=0;
 PU=0;
 

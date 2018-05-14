@@ -38,13 +38,6 @@ dictionary = {}
 for i in range(len(number)):
     dictionary.update({day[i] + "-" + month[i] + "-" + year[i]: lottoResults(number[i], l1[i], l2[i], l3[i], l4[i], l5[i], l6[i])})
 
-#for key in dictionary.keys():
-#  print(key)
-
-print(dictionary['27-01-1957'])
-
-
-
 loop_condition = True
 while loop_condition == True:
     print("\nWelcome to Lottery results!\n")
@@ -64,11 +57,11 @@ while loop_condition == True:
             print("Data:", keys, "Drawn numbers:", values)
     elif main_input == "2":
         data = input("Enter the date (data format dd-mm-yyyy) of the draw: " )
-        print(dictionary[data])
-        print()
-
-
-
+        value = dictionary.get(data)
+        if value == None:
+            print("Incorect value")
+        else:
+            print(dictionary[data])
 
 print("See You:)")
 
