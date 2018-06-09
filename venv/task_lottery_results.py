@@ -108,7 +108,7 @@ while loop_condition == True:
                 counter_min = i
         print("\nThe most frequenlty drawn number is:", counter_max)
         print("The least drawn number is:", counter_min)
-    else:
-        print("Incorect value")
+        else:
+            print("Incorect value")
 
 print("See You:)")
