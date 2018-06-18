@@ -1,10 +1,11 @@
-#tastk number 4 date: 2018-06-07
+#tastk number 3 date: 2018-06-07
 
 import threading
 from time import gmtime, strftime, time, sleep
 from datetime import datetime
+import sys
 
-
+#Recursive functions needed for a function from a task.
 def moduloFibonacci(n, delay, mod=7):
     return FibonacciRecursion(n) % mod
 
@@ -20,6 +21,7 @@ def FibonacciRecursion(n):
         print("Logic error - maximum recursion!!!")
     return result
 
+#5 functions to the task
 def Iteracion(counter, delay, iterations):
     for i in range(iterations):
         string_result = datetime.now().strftime('%Y-%m-%d') + ": " + str(counter) + "\n"
@@ -62,9 +64,7 @@ def FractalFibonacci(n, delay, iterations):
         n += 1
         sleep(delay)
 
-
-#print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-
+#Simpe menu
 print("\nWelcome to Fibonacci numbers:)\n")
 loop_condition = True
 while loop_condition == True:
@@ -76,17 +76,38 @@ while loop_condition == True:
 
     if main_input == "Q" or main_input == "q":
         loop_condition = False
-        break
+        print("See you:)")
+        sys.exit(0)
     elif main_input == "1":
         delay = 0.5
         iterations = 35
-        print("Threads started at", datetime.now().strftime('%H:%M:%S'), "planned completion after 3 minutes)
+        timeout = 180
+        print("\nThreads started at", datetime.now().strftime('%H:%M:%S'), "planned completion after 3 minutes")
         break
+    elif main_input == "2":
+        main_input_2 = input("Enter 3 values (iterations, delay(sec), waiting time for a thread(sec)) separated by spaces: ")
+        main_input_2 = main_input_2.strip(" ")
+        main_input_2 = main_input_2.split()
+        numbers = []
+        for i in main_input_2:
+            if i.isdigit():
+                numbers.append(int(i))
+            else:
+                print("Incorect value")
+        if len(numbers) != 3:
+            print("Incorrect value, there should be 3 numbers!")
+        else:
+            iterations = numbers[0]
+            delay = numbers[1]
+            timeout = numbers[2]
+            print("\nThreads started at", datetime.now().strftime('%H:%M:%S'), "program execution time unknown.")
+            break
     else:
         print("Incorect value")
 
-print("The program works on large numbers so the time is dependent on the speed of your computer")
+print("The program works on large numbers so the time is dependent on the speed of your computer.")
 
+#Creating files
 try:
     file_Iteracion = open("file_Iteracion.txt", "a+")
     file_FibonacciIterative = open("file_FibonacciIterative.txt", "a+")
@@ -94,20 +115,48 @@ try:
     file_ModuloFibonacci = open("file_ModuloFibonacci.txt", "a+")
     file_FractalFibonacci = open("file_iFractalFibonacci.txt", "a+")
 except FileExistError:
-    print("Error - the file already exits")
+    print("\nError - creating files")
 else:
-    print("Files for data have been created")
+    print("\nSuccessful creation of files.")
+
+#Creating threads
+try:
+    t1 = threading.Thread(name="Iteration", target=Iteracion, args =(1, delay, iterations,))
+    t2 = threading.Thread(name="Fibonacci", target=FibonacciIterative, args =(1, delay, iterations,))
+    t3 = threading.Thread(name="Golden number Fibonacci", target=GoldenNumberFibonacci, args =(3, delay, iterations,))
+    t4 = threading.Thread(name="Modulo Fibonacci", target=ModuloFibonacci, args =(1, delay, iterations,))
+    t5 = threading.Thread(name="Fractal Fibonacci", target=FractalFibonacci, args =(1, delay, iterations,))
+except Exception:
+    print("\nError in connecting threads!!!")
+else:
+    print("\nSuccessful connecting threads.")
 
 
-t1 = threading.Thread(name="Iteration", target=Iteracion, args =(1, delay, iterations,))
-t2 = threading.Thread(name="Fibonacci", target=FibonacciIterative, args =(1, delay, iterations,))
-t3 = threading.Thread(name="Golden number Fibonacci", target=GoldenNumberFibonacci, args =(3, delay, iterations,))
-t4 = threading.Thread(name="Modulo Fibonacci", target=ModuloFibonacci, args =(1, delay, iterations,))
-t5 = threading.Thread(name="Fractal Fibonacci", target=FractalFibonacci, args =(1, delay, iterations,))
+#Start threads
 t1.start()
 t2.start()
 t3.start()
 t4.start()
 t5.start()
+
+t1.join(timeout)
+t2.join(timeout)
+t3.join(timeout)
+t4.join(timeout)
+t5.join(timeout)
+
+#Closing files after completing threads
+if not t1.isAlive() and not t2.isAlive() and not t2.isAlive() and not t3.isAlive() and not t4.isAlive() and not t5.isAlive():
+    file_Iteracion.close()
+    file_FibonacciIterative.close()
+    file_GoldenNumberFibonacci.close()
+    file_ModuloFibonacci.close()
+    file_FractalFibonacci.close()
+    print("\nAll threads finished, closing files.")
+else:
+    print("\nError threads during execution, unable to properly close files!!!")
+
+print("See you:)")
+
 
 
